@@ -7,7 +7,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
 import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.util.backoff.ExponentialBackOff;
-import org.springframework.util.backoff.FixedBackOff;
 
 @Configuration
 public class KafkaConfig {
@@ -25,7 +24,6 @@ public class KafkaConfig {
         backOff.setMaxInterval(10000L);      // Max wait = 10 seconds
         backOff.setMaxAttempts(3);
 
-        DefaultErrorHandler errorHandler = new DefaultErrorHandler(recoverer, backOff);
-        errorHandler.set
+        return new DefaultErrorHandler(recoverer, backOff);
     }
 }
